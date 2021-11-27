@@ -87,6 +87,11 @@ impl Subscription {
         self.name.rsplit('/').next().unwrap()
     }
 
+    /// Returns if bufer has more, indicating more pulling is ok
+    pub fn has_more(&self) -> bool {
+        self.buffer.len() > 0
+    }
+
     /// Receive the next message from the subscription.
     pub async fn receive(&mut self) -> Option<Message> {
         self.receive_with_options(Default::default()).await
